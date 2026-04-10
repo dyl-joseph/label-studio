@@ -27,9 +27,7 @@ You'll need to follow the instructions below to stand up an instance of SAM2 bef
 
 ## Before you begin
 
-Before you begin, you must install the [Label Studio ML backend](https://github.com/HumanSignal/label-studio-ml-backend?tab=readme-ov-file#quickstart). 
-
-This tutorial uses the [`segment_anything_2_image` example](https://github.com/HumanSignal/label-studio-ml-backend/tree/master/label_studio_ml/examples/segment_anything_2_image). 
+This tutorial uses the [`segment_anything_2_image` example](https://github.com/HumanSignal/label-studio-ml-backend/tree/master/label_studio_ml/examples/segment_anything_2_image) and [Label Studio ML backend](https://github.com/HumanSignal/label-studio-ml-backend?tab=readme-ov-file#quickstart). 
 
 Note that as of 8/1/2024, SAM2 only runs on GPU.
 
@@ -121,7 +119,7 @@ This means all three control tags should be represented in your labeling configu
 
 ## Running from source
 
-1. To run the ML backend without Docker, you have to clone the repository and install all dependencies using pip:
+1. To run the ML backend without Docker, you have to clone the repository, make a checkpoints folder (to store SAM2 weights), and install all dependencies using pip:
 
 ```bash
 git clone https://github.com/HumanSignal/label-studio-ml-backend.git
@@ -131,17 +129,29 @@ cd label_studio_ml/examples/segment_anything_2_image
 pip install -r requirements.txt
 ```
 
-2. Download [`segment-anything-2` repo](https://github.com/facebookresearch/segment-anything-2) into the root directory. Install SegmentAnything model and download checkpoints using [the official Meta documentation](https://github.com/facebookresearch/segment-anything-2?tab=readme-ov-file#installation)
+2. Follow the directions within the [`segment-anything-2` repo](https://github.com/facebookresearch/segment-anything-2) to clone the directory, download necessary packages, model, and checkpoints.
 
+3. You should have the following folder structure:
 
-3. Then you can start the ML backend on the default port `9090`:
+```
+parent directory
+├── label-studio-ml-backend
+│   └── label-studio-ml
+│       └── examples
+│           └── segment_anything_2_image
+└── sam2
+    ├── sam2
+    └── checkpoints
+```
+
+4. Then you can start the ML backend on the default port `9090`:
 
 ```bash
 cd ../
 label-studio-ml start ./segment_anything_2_image
 ```
 
-4. Connect running ML backend server to Label Studio: go to your project `Settings -> Machine Learning -> Add Model` and specify `http://localhost:9090` as a URL. Read more in the official [Label Studio documentation](https://labelstud.io/guide/ml#Connect-the-model-to-Label-Studio).
+5. Connect running ML backend server to Label Studio: go to your project `Settings -> Machine Learning -> Add Model` and specify `http://localhost:9090` as a URL. Read more in the official [Label Studio documentation](https://labelstud.io/guide/ml#Connect-the-model-to-Label-Studio).
 
 ## Running with Docker (coming soon)
 
